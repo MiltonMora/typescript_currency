@@ -1,23 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { getCurrencyIn } from './api/frankfurterApiCalls';
+import { currencyType } from './types/types';
+import useCurrency from './hooks/useCurrency';
+
 import './App.css';
 
 function App() {
+  const [currencyResponse, dispach] = useCurrency();
+  useEffect(() => {
+    getCurrencyIn(currencyType.EUR)
+    .then(response => {
+      dispach({
+        type: 'show_currency',
+        payload: response 
+      })
+    })
+  },[dispach]);
+  console.log(currencyResponse)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="">
+      <header className="">
+        <p>{currencyResponse.amount} {currencyResponse.base} Equivale a {currencyResponse.rates.USD} USD</p> 
       </header>
     </div>
   );
