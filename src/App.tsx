@@ -18,8 +18,8 @@ function App() {
   },[dispach]);
   console.log(currencyResponse)
   return (
-    <div className="">
-      <header className="">
+    <div className="App">
+      <header className="App-header">
         <p>{currencyResponse.amount} {currencyResponse.base} Equivale a {currencyResponse.rates.USD} USD</p> 
       </header>
     </div>
